@@ -1,5 +1,12 @@
 {
   "files": [],
+  "compilerOptions": {
+    "jsx": "react-jsx", // Ensure this is set to "react-jsx" for React 18+
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node"
+  
+  },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
