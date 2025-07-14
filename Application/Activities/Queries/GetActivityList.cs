@@ -1,3 +1,4 @@
+using Application.Core;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,6 @@ namespace Application.Activities.Queries
             {
                 return await context.Activities.ToListAsync(cancellationToken);
             }
-
         }
     }
 }

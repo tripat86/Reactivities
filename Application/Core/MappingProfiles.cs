@@ -1,3 +1,4 @@
+using Application.DTOs;
 using AutoMapper;
 using Domain;
 
@@ -9,6 +10,9 @@ namespace Application.Core
         {
             //This is used in EditActivity.cs
             CreateMap<Activity, Activity>();
+
+            CreateMap<CreateActivityDto, Activity>();
+            CreateMap<EditActivityDto, Activity>();
         }
     }
 }
