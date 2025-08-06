@@ -7,9 +7,10 @@ interface Store{
     uiStore: UiStore
 }
 
-//You're just creating an object (store) that holds an instance of CounterStore.
+//You're just creating an object (store) that holds an instance of CounterStore and UiStore.
 export const store: Store = {
     counterStore: new CounterStore(),
     uiStore: new UiStore()
 }
+
 export const StoreContext = createContext(store);
