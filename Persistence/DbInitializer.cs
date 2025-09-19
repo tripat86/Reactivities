@@ -1,13 +1,34 @@
 using System;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence;
 
 public class DbInitializer
 {
-    public static async Task SeedData(AppDbContext context)
+    public static async Task SeedData(AppDbContext context, UserManager<User> userManager)
     {
-        if(context.Activities.Any()) return;
+        if (!userManager.Users.Any())
+        {
+            var users = new List<User>
+            {
+                new() {DisplayName = "Bob", UserName = "bob@test.com", Email = "bob@test.com" },
+                new() {DisplayName = "Tom", UserName = "tom@test.com", Email = "tom@test.com" },
+                new() {DisplayName = "Jane", UserName = "jane@test.com", Email = "jane@test.com" }
+            };
+            foreach (var user in users)
+            {
+                await userManager.CreateAsync(user, "Pa$$w0rd");// Identity will hash the password
+                // The password is not stored in the database, only the hash is stored
+                // The password is not returned by the API, only the token is returned
+                // The token is used to authenticate the user in subsequent requests
+            }
+        }
+
+
+
+        if (context.Activities.Any()) return;
+
         var activities = new List<Activity>
         {
             new() {
@@ -117,8 +138,8 @@ public class DbInitializer
                 Longitude = -0.781404
             }
         };
-var aa = activities[0];
-aa.City = "ll";
+        var aa = activities[0];
+        aa.City = "ll";
         context.Activities.AddRange(activities);
 
         await context.SaveChangesAsync();
