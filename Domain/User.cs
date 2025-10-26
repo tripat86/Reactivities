@@ -9,5 +9,8 @@ namespace Domain
         public string? Bio { get; set; }
         
         public string? ImageUrl { get; set; }
+
+        // navigation property
+        public ICollection<ActivityAttendee> Activities { get; set; } = [];
     }
 }
